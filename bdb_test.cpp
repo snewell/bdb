@@ -93,3 +93,10 @@ TEST(BDB, test_default)
 
     ASSERT_EQ(true, val._def);
 }
+
+TEST(BDB, test_defaultVoid)
+{
+    bdb([]() {
+            return false;
+        }, [] () { });
+}
