@@ -12,7 +12,7 @@ through a build tool.
 
 1. `mkdir <build_dir>`
 2. `cd <build_dir>`
-3. `cmake /path/to/bureaucracy/src`
+3. `cmake /path/to/bdb/src`
 4. `make`
 5. (Optional, requires [gtest][2]) `make test`
 6. `make install`
