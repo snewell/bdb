@@ -5,11 +5,42 @@ project("bdb"
         LANGUAGES CXX
         VERSION 0.1.0)
 
+option(BUILD_TESTS "Build optional tests" ON)
+
 enable_testing()
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(bdb_test bdb_test.cpp)
-target_link_libraries(bdb_test gtest gtest_main)
-add_test(bdb_test bdb_test)
+if(BUILD_TESTS)
+    find_library(GTEST gtest)
+    find_library(GTEST_MAIN gtest_main)
+    message(STATUS "gtest location: ${GTEST}")
+    message(STATUS "gtest_main location: ${GTEST_MAIN}")
+    if(GTEST AND GTEST_MAIN)
+        set(BUILD_TESTS ON)
+    else()
+        message(WARNING "Could not find gtest libraries; unit tests disabled")
+    endif()
+endif()
+
+if(BUILD_TESTS)
+    function(create_test name)
+        add_executable(${name} ${ARGN})
+        target_link_libraries(${name}
+                                ${GTEST}
+                                ${GTEST_MAIN}
+                             )
+        add_test(${name} ${name})
+    endfunction()
+else()
+    function(create_test name)
+        #do nothing
+    endfunction()
+endif()
+
+create_test(bdb_test bdb_test.cpp)
+
+install(FILES
+            bdb.h
+        DESTINATION include)
