@@ -4,30 +4,35 @@
 #include <utility>
 
 template <typename FALLBACK>
-void bdb(FALLBACK &&fallback)
+auto bdb(FALLBACK &&fallback)
 {
-    fallback();
+    return fallback();
 }
 
 template <typename PRED, typename EXEC>
-void bdb(PRED &&pred, EXEC &&exec)
+auto bdb(PRED &&pred, EXEC &&exec)
 {
     if(pred())
     {
-        exec();
+        return exec();
     }
+   
+    // user should add a fallback function, but creating a default
+    // value is the best general case solution
+    using RETVAL = decltype(exec());
+    return RETVAL{};
 }
 
 template <typename PRED, typename EXEC, typename ...REMAINING>
-void bdb(PRED &&pred, EXEC &&exec, REMAINING && ...remaining)
+auto bdb(PRED &&pred, EXEC &&exec, REMAINING && ...remaining)
 {
     if(pred())
     {
-        exec();
+        return exec();
     }
     else
     {
-        bdb(std::forward<REMAINING>(remaining)...);
+        return bdb(std::forward<REMAINING>(remaining)...);
     }
 }
 
