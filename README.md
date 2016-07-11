@@ -21,7 +21,7 @@ Because bdb uses C++14 you'll need a C++14 compliant compiler to use it,
 including building the tests.  If you're using a toolchain CMake doesn't have
 built-in support for you'll need to add the appropriate flags at configuration
 time (something like
-`cmake -DCMAKE_CXX_FLAGS="-std=c++14" /path/to/bureaucracy/src`).
+`cmake -DCMAKE_CXX_FLAGS="-std=c++14" /path/to/bdb/src`).
 
 ## Conversation
 Friend: i actually have a better idea anyway 10:33:21 AM MDT  
