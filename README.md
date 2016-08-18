@@ -4,6 +4,10 @@ ternary operator on steroids.  It started as a joke during a conversation with
 a friend (available in the bottom of this readme) and is unlikely to be
 maintained.
 
+bdp (Big Dynamic Pipelines) is another function that provides a pipeline of
+function calls where the results of each function are passed to the next.  The
+result of the final function is returned to the original caller.
+
 ## Building
 Because the library contains only a single header it can be installed by
 copying `bdb.h` to an appropriate location (i.e., an include directory).

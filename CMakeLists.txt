@@ -40,7 +40,9 @@ else()
 endif()
 
 create_test(bdb_test bdb_test.cpp)
+create_test(bdp_test bdp_test.cpp)
 
 install(FILES
             bdb.h
+            bdp.h
         DESTINATION include)
